@@ -82,4 +82,33 @@ order_2.build_order_msg(1, 134762, 398405, 12800, [1])
 #         threading.Thread(target=order_2.create).start()
 #     time.sleep(2)
 
+
+# import datetime
+# import time
+# from pkg.utills import stdlog
+
+# 
+# 
+# # 设置目标时间
+# target_time_str = '2024-06-27 20:35:00'
+# stdlog.info(f'目标时间: {target_time_str}')
+# 
+# while True:
+#     # 比较当前时间和目标时间
+#     if datetime.datetime.now() >= datetime.datetime.strptime(target_time_str, '%Y-%m-%d %H:%M:%S'):
+#         stdlog.warning('时间到达，开始执行')
+#         break
+# 
+#     # 等待 1 秒后再次检查
+#     time.sleep(0.1)
+# 
+# 
+# while True:
+#     order_1.create()
+#     order_2.create()
+#     time.sleep(0.7)
+
+
+
+
 ```
