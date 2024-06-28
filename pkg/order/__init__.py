@@ -174,12 +174,18 @@ class Order:
                 if data["errno"] == 0:
                     stdlog.success("下单成功！")
                     stdlog.warning("为防止误判，将继续检查票务状态")
-                elif data["errno"] == 100079:
+                elif data["errno"] == 100079 or data["errno"] == 100048:
                     stdlog.success(f'次订单已存在，无需重复下单！{data}')
                     self.finished = True
                     return
+                elif data["errno"] == 100051:
+                    self.token = self.get_token()
+                    stdlog.warning("token 过期，已重新获取")
+                elif data["errno"] == 219:
+                    stdlog.info("库存不足")
                 else:
                     stdlog.error(f'下单失败！{data}')
+
             except json.JSONDecodeError as e:
                 stdlog.error(f'JSON解析错误: {e}')
                 stdlog.error(f'响应内容: {res.read().decode()}')
