@@ -178,11 +178,23 @@ class Order:
                     stdlog.success(f'次订单已存在，无需重复下单！{data}')
                     self.finished = True
                     return
-                elif data["errno"] == 100051:
+                elif data["errno"] == 100051 or data["errno"] == 100041:
                     self.token = self.get_token()
                     stdlog.warning("token 过期，已重新获取")
+                elif data["errno"] == 3:
+                    stdlog.warning("慢一点（强制5秒）")
+                    time.sleep(2.8)
+
+                elif data["errno"] == 100001:
+                    stdlog.warning("👋📱👋")
+                elif data["errno"] == 100016:
+                    stdlog.error("项目不可售")
                 elif data["errno"] == 219:
                     stdlog.info("库存不足")
+                elif data["errno"] == 100009:
+                    stdlog.warning("无票")
+                elif data["errno"] == 100017:
+                    stdlog.warning("票种不可售")
                 else:
                     stdlog.error(f'下单失败！{data}')
 
